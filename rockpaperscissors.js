@@ -13,47 +13,106 @@ function getComputerChoice() {
         }
 }
 
-function getHumanChoice() {
-    let input = prompt ("Rock, Paper or Scissors?");
-    return input;
-}
+//function getHumanChoice() {
+//    let input = prompt ("Rock, Paper or Scissors?");
+//    return input;
+//}
 
 // console.log(getHumanChoice());
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
-        console.log("Tie!");
+        return `Tie! You both chose ${humanChoice}`;
     } else if (
         (humanChoice === "Rock" && computerChoice === "Scissors") ||
         (humanChoice === "Paper" && computerChoice === "Rock") ||
         (humanChoice === "Scissors" && computerChoice === "Paper")
     ) {
         humanScore++;
-        console.log(`You Win! ${humanChoice} beats ${computerChoice}`)
+        return `You Win! ${humanChoice} beats ${computerChoice}`;
     } else {
         computerScore++;
-        console.log(`You Lose!  ${computerChoice} beats ${humanChoice}`)
+        return `You Lose!  ${computerChoice} beats ${humanChoice}`;
     }
 }
 
-function playGame() {
-  for (let i = 0; i < 5; i++) {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    playRound(humanSelection, computerSelection);
-  }
+//function playGame() {
+//  for (let i = 0; i < 5; i++) {
+//    const humanSelection = getHumanChoice();
+//    const computerSelection = getComputerChoice();
+//    playRound(humanSelection, computerSelection);
+//  }
 
-  console.log("Game over!");
-  console.log(`Final Score — Human: ${humanScore}, Computer: ${computerScore}`);
+//  console.log("Game over!");
+//  console.log(`Final Score — Human: ${humanScore}, Computer: ${computerScore}`);
 
-  if (humanScore > computerScore) {
-    console.log("You win the game! 🎉");
-  } else if (computerScore > humanScore) {
-    console.log("You lose the game! 😢");
-  } else {
-    console.log("The game is a tie! 🤝");
-  }
-}
+//  if (humanScore > computerScore) {
+//    console.log("You win the game! 🎉");
+//  } else if (computerScore > humanScore) {
+//  console.log("You lose the game! 😢");
+//  } else {
+//    console.log("The game is a tie! 🤝");
+//  }
+//}
 
-playGame();
+//playGame();
 //console.log(`Score — Human: ${humanScore}, Computer: ${computerScore}`);
+
+// DOM Selectors
+// DOM Slectors
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+const resultsDiv = document.querySelector('#results');
+
+rockBtn.addEventListener('click', () => {
+  const computerChoice = getComputerChoice();
+  const roundResult = playRound('Rock', computerChoice);
+
+  resultsDiv.textContent = `${roundResult} | Score - You: ${humanScore}, Computer: ${computerScore}`;
+
+  if (humanScore === 5 || computerScore === 5) {
+    const winner =
+      humanScore === 5 ? `You won!` : `You lost :(`;
+    resultsDiv.textContent += ` | ${winner}`;
+
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+  }
+});
+
+paperBtn.addEventListener('click', () => {
+  const computerChoice = getComputerChoice();
+  const roundResult = playRound('Paper', computerChoice);
+
+  resultsDiv.textContent = `${roundResult} | Score - You: ${humanScore}, Computer: ${computerScore}`;
+
+  if (humanScore === 5 || computerScore === 5) {
+    const winner =
+      humanScore === 5 ? `You won!` : `You lost :(`;
+    resultsDiv.textContent += ` | ${winner}`;
+
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+  }
+});
+
+scissorsBtn.addEventListener('click', () => {
+  const computerChoice = getComputerChoice();
+  const roundResult = playRound('Scissors', computerChoice);
+
+  resultsDiv.textContent = `${roundResult} | Score - You: ${humanScore}, Computer: ${computerScore}`;
+
+  if (humanScore === 5 || computerScore === 5) {
+    const winner =
+      humanScore === 5 ? `You won!` : `You lost :(`;
+    resultsDiv.textContent += ` | ${winner}`;
+
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+  }
+});
+
